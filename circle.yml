@@ -1,0 +1,27 @@
+machine:
+  services:
+    - docker
+
+general:
+  branches:
+    ignore:
+      - gh-pages # list of branches to ignore
+
+dependencies:
+  pre:
+    - apt-get install software-properties-common
+    - apt-add-repository ppa:ansible/ansible -y
+    - apt-get update
+    - apt-get install ansible
+
+test:
+  override:
+      - ansible-playbook --syntax-check --list-tasks -i ansible/hyperion  ansible/master.yml
+      - ansible-playbook --syntax-check --list-tasks -i ansible/hyperion  ansible/nodes.yml
+
+#deployment:
+#  hub: 
+#    branch: master
+#    commands:
+#      - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+#      - docker push portefaix/elasticsearch

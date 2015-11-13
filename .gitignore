@@ -1,0 +1,7 @@
+# Emacs
+*~
+
+# Project
+.vagrant/
+bin/
+*.box
